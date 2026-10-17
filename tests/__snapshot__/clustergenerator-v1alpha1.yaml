@@ -56,6 +56,109 @@ spec:
         name: string
         namespace: string
       serviceSlug: string
+    crusoeContainerRegistryKeySpec:
+      alias: string
+      apiURL: string
+      auth:
+        accessKey:
+          accessKeyIDSecretRef:
+            key: string
+            name: string
+            namespace: string
+          secretKeySecretRef:
+            key: string
+            name: string
+            namespace: string
+        serviceAccount:
+          audience: string
+          clientIDSecretRef:
+            key: string
+            name: string
+            namespace: string
+          clientSecretSecretRef:
+            key: string
+            name: string
+            namespace: string
+          tokenURL: string
+      expiresAfter: "24h"
+    crusoeIntelligenceAPIKeySpec:
+      alias: string
+      apiURL: string
+      auth:
+        accessKey:
+          accessKeyIDSecretRef:
+            key: string
+            name: string
+            namespace: string
+          secretKeySecretRef:
+            key: string
+            name: string
+            namespace: string
+        serviceAccount:
+          audience: string
+          clientIDSecretRef:
+            key: string
+            name: string
+            namespace: string
+          clientSecretSecretRef:
+            key: string
+            name: string
+            namespace: string
+          tokenURL: string
+      expiresAfter: "24h"
+      projectID: string
+    crusoeMonitoringKeySpec:
+      alias: string
+      apiURL: string
+      auth:
+        accessKey:
+          accessKeyIDSecretRef:
+            key: string
+            name: string
+            namespace: string
+          secretKeySecretRef:
+            key: string
+            name: string
+            namespace: string
+        serviceAccount:
+          audience: string
+          clientIDSecretRef:
+            key: string
+            name: string
+            namespace: string
+          clientSecretSecretRef:
+            key: string
+            name: string
+            namespace: string
+          tokenURL: string
+      expiresAfter: "24h"
+      projectID: string
+    crusoeObjectStorageKeySpec:
+      alias: string
+      apiURL: string
+      auth:
+        accessKey:
+          accessKeyIDSecretRef:
+            key: string
+            name: string
+            namespace: string
+          secretKeySecretRef:
+            key: string
+            name: string
+            namespace: string
+        serviceAccount:
+          audience: string
+          clientIDSecretRef:
+            key: string
+            name: string
+            namespace: string
+          clientSecretSecretRef:
+            key: string
+            name: string
+            namespace: string
+          tokenURL: string
+      expiresAfter: "24h"
+      organizationID: string
     ecrAuthorizationTokenSpec:
       auth:
         jwt:
@@ -393,4 +496,4 @@ spec:
           name: string
       timeout: string
       url: string
-  kind: "ACRAccessToken" # "ACRAccessToken", "BeyondtrustWorkloadCredentialsDynamicSecret", "CloudsmithAccessToken", "ECRAuthorizationToken", "Fake", "GCRAccessToken", "GithubAccessToken", "GitlabDeployToken", "QuayAccessToken", "Password", "SSHKey", "STSSessionToken", "UUID", "VaultDynamicSecret", "Webhook", "Grafana", "MFA"
+  kind: "ACRAccessToken" # "ACRAccessToken", "BeyondtrustWorkloadCredentialsDynamicSecret", "CloudsmithAccessToken", "CrusoeContainerRegistryKey", "CrusoeIntelligenceAPIKey", "CrusoeMonitoringKey", "CrusoeObjectStorageKey", "ECRAuthorizationToken", "Fake", "GCRAccessToken", "GithubAccessToken", "GitlabDeployToken", "QuayAccessToken", "Password", "SSHKey", "STSSessionToken", "UUID", "VaultDynamicSecret", "Webhook", "Grafana", "MFA"

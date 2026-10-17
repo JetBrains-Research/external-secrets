@@ -19,11 +19,12 @@ Multi-module repo: `apis/`, `runtime/`, `e2e/`, and each `providers/v1/*/` have 
 - `make reviewable` is the gate for PRs. Run it, not individual checks.
 - Helm chart is the source of truth for deploy manifests. `make manifests` generates static YAML from it.
 - Provider docs `{% include %}` reusable YAML snippets from `docs/snippets/` (`macros` plugin). AWS authentication is documented once on the standalone `docs/provider/aws-access.md` page; the per-service pages (`aws-secrets-manager.md`, `aws-parameter-store.md`) link to it rather than transcluding it.
-- CRD tests use snapshot testing. Run `make test.crds.update` to update snapshots after CRD changes.
+- CRD tests use snapshot testing. Run `make test.crds.update` to update snapshots after CRD changes. The sample fills every field, so kinds with a `MaxProperties=1` union need `ignoreErrors: ["in body should have at most 1 properties"]` in their `tests/<kind>_test.yaml`.
 - `make update-deps` updates dependencies across all modules at once.
 - Add a `git notes add HEAD` entry on every non-trivial commit. Record key design decisions, trade-offs, and gotchas. Queryable via `git notes show <sha>`.
 - If you discover a non-obvious pattern while implementing, add it here before the PR is merged. Keep entries general — applicable across the codebase, not specific to one provider or feature.
 - Never edit `zz_generated.*` files by hand. They are owned by controller-gen. Modify the source types and run `make generate` (included in `make reviewable`).
+- The controller serves every tenant from one process. Never use SDK helpers that install credentials on `http.DefaultClient` or `http.DefaultTransport`; build a dedicated `http.Client` per call instead.
 - After everything is committed - **ALWAYS RUN `make check-diff`** - this is the first step where PRs fall apart that LLMs forget - there are a lot of generated code outside of the main `make reviewable` spec like helm chart tests, docs, etc.
 - 
 
@@ -182,6 +183,10 @@ Stateful generators return a non-nil state. `runtime/statemanager` persists it t
 `Cleanup` on deletion. If state persistence fails post-Generate, statemanager invokes Cleanup as rollback; if Cleanup
 itself errors, it creates a `GeneratorState` with an immediate `GarbageCollectionDeadline`.
 
+`Cleanup` receives the generator manifest as it was at `Generate` time (`GeneratorState.Spec.Resource`), so the state only
+needs the IDs required to revoke what was generated. The previous state is cleaned up after `--generator-gc-grace-period`
+(2m by default) once a newer one exists, so old and new credentials briefly coexist.
+
 No generator currently uses `runtime/cache.Must` style client caching.
 
 ### Registration
@@ -199,6 +204,9 @@ func init() {
     genv1alpha1.Register(foo.Kind(), foo.NewGenerator())
 }
 ```
+
+One module may serve several closely related kinds: export a `New<X>Generator()` / `<X>Kind()` pair per kind and register
+each one (see `generators/v1/crusoe`).
 
 `Register` panics on duplicate kinds. Scheme registration is separate, in `apis/generators/v1alpha1/register.go`:
 `<Name>Kind = reflect.TypeFor[<Name>]().Name()` and `SchemeBuilder.Register(&<Name>{}, &<Name>List{})`.

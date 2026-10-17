@@ -1,0 +1,21 @@
+# 1. Create a Crusoe Cloud API access key, or a service account credential.
+# 2. Store it in a Kubernetes secret in the namespace of the ExternalSecret, e.g.
+#    kubectl create secret generic crusoe-credentials \
+#      --from-literal=access-key-id=<access key> \
+#      --from-literal=secret-key=<secret key>
+---
+apiVersion: generators.external-secrets.io/v1alpha1
+kind: CrusoeContainerRegistryKey
+metadata:
+  name: crusoe-registry
+spec:
+  alias: "external-secrets" # Optional
+  expiresAfter: "24h" # Optional, defaults to 24h. Tokens cannot be revoked, only expire.
+  auth:
+    accessKey:
+      accessKeyIDSecretRef:
+        name: crusoe-credentials
+        key: access-key-id
+      secretKeySecretRef:
+        name: crusoe-credentials
+        key: secret-key

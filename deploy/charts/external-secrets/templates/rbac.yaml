@@ -97,6 +97,10 @@ rules:
     resources:
     - "acraccesstokens"
     - "cloudsmithaccesstokens"
+    - "crusoecontainerregistrykeys"
+    - "crusoeintelligenceapikeys"
+    - "crusoemonitoringkeys"
+    - "crusoeobjectstoragekeys"
     {{- if .Values.processClusterGenerator }}
     - "clustergenerators"
     {{- end }}
@@ -279,6 +283,10 @@ rules:
     - "acraccesstokens"
     - "beyondtrustworkloadcredentialsdynamicsecrets"
     - "cloudsmithaccesstokens"
+    - "crusoecontainerregistrykeys"
+    - "crusoeintelligenceapikeys"
+    - "crusoemonitoringkeys"
+    - "crusoeobjectstoragekeys"
     {{- if .Values.processClusterGenerator }}
     - "clustergenerators"
     {{- end }}
@@ -346,6 +354,10 @@ rules:
     resources:
     - "acraccesstokens"
     - "cloudsmithaccesstokens"
+    - "crusoecontainerregistrykeys"
+    - "crusoeintelligenceapikeys"
+    - "crusoemonitoringkeys"
+    - "crusoeobjectstoragekeys"
     {{- if .Values.processClusterGenerator }}
     - "clustergenerators"
     {{- end }}

@@ -1,0 +1,37 @@
+# Authenticates as a Crusoe Cloud service account. Store the OAuth2 client
+# credentials in a Kubernetes secret in the namespace of the ExternalSecret, e.g.
+#   kubectl create secret generic crusoe-service-account \
+#     --from-literal=client-id=<client id> \
+#     --from-literal=client-secret=<client secret>
+---
+apiVersion: generators.external-secrets.io/v1alpha1
+kind: CrusoeIntelligenceAPIKey
+metadata:
+  name: crusoe-intelligence
+spec:
+  alias: "external-secrets" # Optional
+  projectID: "f47ac10b-58cc-4372-a567-0e02b2c3d479" # Optional, scopes the key to a project
+  expiresAfter: "720h" # Optional, defaults to 24h
+  auth:
+    serviceAccount:
+      clientIDSecretRef:
+        name: crusoe-service-account
+        key: client-id
+      clientSecretSecretRef:
+        name: crusoe-service-account
+        key: client-secret
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: crusoe-intelligence
+spec:
+  refreshInterval: "168h" # Keep this below the generator's expiresAfter
+  target:
+    name: crusoe-intelligence
+  dataFrom:
+    - sourceRef:
+        generatorRef:
+          apiVersion: generators.external-secrets.io/v1alpha1
+          kind: CrusoeIntelligenceAPIKey
+          name: crusoe-intelligence

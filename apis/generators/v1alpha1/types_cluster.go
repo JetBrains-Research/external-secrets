@@ -30,7 +30,9 @@ type ClusterGeneratorSpec struct {
 }
 
 // GeneratorKind represents a kind of generator.
-// +kubebuilder:validation:Enum=ACRAccessToken;BeyondtrustWorkloadCredentialsDynamicSecret;CloudsmithAccessToken;ECRAuthorizationToken;Fake;GCRAccessToken;GithubAccessToken;GitlabDeployToken;QuayAccessToken;Password;SSHKey;STSSessionToken;UUID;VaultDynamicSecret;Webhook;Grafana;MFA
+// +kubebuilder:validation:Enum=ACRAccessToken;BeyondtrustWorkloadCredentialsDynamicSecret;CloudsmithAccessToken;CrusoeContainerRegistryKey;CrusoeIntelligenceAPIKey;CrusoeMonitoringKey;CrusoeObjectStorageKey;ECRAuthorizationToken;Fake;GCRAccessToken;GithubAccessToken;GitlabDeployToken;QuayAccessToken;Password;SSHKey;STSSessionToken;UUID;VaultDynamicSecret;Webhook;Grafana;MFA
+//
+//nolint:lll // Kubebuilder validation markers cannot be split across multiple lines.
 type GeneratorKind string
 
 const (
@@ -68,6 +70,14 @@ const (
 	GeneratorKindCloudsmithAccessToken GeneratorKind = "CloudsmithAccessToken"
 	// GeneratorKindBeyondtrustWorkloadCredentialsDynamicSecret represents a BeyondTrust Workload Credentials dynamic secret generator.
 	GeneratorKindBeyondtrustWorkloadCredentialsDynamicSecret GeneratorKind = "BeyondtrustWorkloadCredentialsDynamicSecret"
+	// GeneratorKindCrusoeContainerRegistryKey represents a Crusoe Container Registry key generator.
+	GeneratorKindCrusoeContainerRegistryKey GeneratorKind = "CrusoeContainerRegistryKey"
+	// GeneratorKindCrusoeIntelligenceAPIKey represents a Crusoe Intelligence API key generator.
+	GeneratorKindCrusoeIntelligenceAPIKey GeneratorKind = "CrusoeIntelligenceAPIKey"
+	// GeneratorKindCrusoeMonitoringKey represents a Crusoe Monitoring key generator.
+	GeneratorKindCrusoeMonitoringKey GeneratorKind = "CrusoeMonitoringKey"
+	// GeneratorKindCrusoeObjectStorageKey represents a Crusoe Object Storage key generator.
+	GeneratorKindCrusoeObjectStorageKey GeneratorKind = "CrusoeObjectStorageKey"
 )
 
 // GeneratorSpec defines the configuration for various supported generator types.
@@ -77,6 +87,10 @@ type GeneratorSpec struct {
 	ACRAccessTokenSpec                              *ACRAccessTokenSpec                              `json:"acrAccessTokenSpec,omitempty"`
 	BeyondtrustWorkloadCredentialsDynamicSecretSpec *BeyondtrustWorkloadCredentialsDynamicSecretSpec `json:"beyondtrustWorkloadCredentialsDynamicSecretSpec,omitempty"`
 	CloudsmithAccessTokenSpec                       *CloudsmithAccessTokenSpec                       `json:"cloudsmithAccessTokenSpec,omitempty"`
+	CrusoeContainerRegistryKeySpec                  *CrusoeContainerRegistryKeySpec                  `json:"crusoeContainerRegistryKeySpec,omitempty"`
+	CrusoeIntelligenceAPIKeySpec                    *CrusoeLimitedUsageAPIKeySpec                    `json:"crusoeIntelligenceAPIKeySpec,omitempty"`
+	CrusoeMonitoringKeySpec                         *CrusoeLimitedUsageAPIKeySpec                    `json:"crusoeMonitoringKeySpec,omitempty"`
+	CrusoeObjectStorageKeySpec                      *CrusoeObjectStorageKeySpec                      `json:"crusoeObjectStorageKeySpec,omitempty"`
 	ECRAuthorizationTokenSpec                       *ECRAuthorizationTokenSpec                       `json:"ecrAuthorizationTokenSpec,omitempty"`
 	FakeSpec                                        *FakeSpec                                        `json:"fakeSpec,omitempty"`
 	GCRAccessTokenSpec                              *GCRAccessTokenSpec                              `json:"gcrAccessTokenSpec,omitempty"`

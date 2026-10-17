@@ -1,0 +1,36 @@
+{% raw %}
+apiVersion: generators.external-secrets.io/v1alpha1
+kind: CrusoeMonitoringKey
+metadata:
+  name: crusoe-monitoring
+spec:
+  alias: "external-secrets" # Optional
+  projectID: "f47ac10b-58cc-4372-a567-0e02b2c3d479" # Optional, scopes the key to a project
+  expiresAfter: "24h" # Optional, defaults to 24h
+  auth:
+    accessKey:
+      accessKeyIDSecretRef:
+        name: crusoe-credentials
+        key: access-key-id
+      secretKeySecretRef:
+        name: crusoe-credentials
+        key: secret-key
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: crusoe-monitoring
+spec:
+  refreshInterval: "12h" # Keep this below the generator's expiresAfter
+  target:
+    name: crusoe-monitoring
+    template:
+      data:
+        token: "{{ .api_key }}"
+  dataFrom:
+    - sourceRef:
+        generatorRef:
+          apiVersion: generators.external-secrets.io/v1alpha1
+          kind: CrusoeMonitoringKey
+          name: crusoe-monitoring
+{% endraw %}

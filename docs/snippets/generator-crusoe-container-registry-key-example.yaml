@@ -1,0 +1,33 @@
+{% raw %}
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: crusoe-registry-credentials
+spec:
+  refreshInterval: "6h" # Keep this well below the generator's expiresAfter
+  target:
+    name: crusoe-registry-credentials
+    template:
+      type: kubernetes.io/dockerconfigjson
+      metadata:
+        annotations:
+          expiresAt: "{{ .expires_at }}"
+      data:
+        # The registry username is the email address of your Crusoe Cloud account.
+        .dockerconfigjson: |
+          {
+            "auths": {
+              "registry.us-east1-a.ccr.crusoecloudcompute.com": {
+                "username": "you@example.com",
+                "password": "{{ .token }}",
+                "auth": "{{ printf "%s:%s" "you@example.com" .token | b64enc }}"
+              }
+            }
+          }
+  dataFrom:
+    - sourceRef:
+        generatorRef:
+          apiVersion: generators.external-secrets.io/v1alpha1
+          kind: CrusoeContainerRegistryKey
+          name: crusoe-registry
+{% endraw %}

@@ -58,6 +58,10 @@ type GeneratorSpec struct {
 	ACRAccessTokenSpec                              *ACRAccessTokenSpec                              `json:"acrAccessTokenSpec,omitempty"`
 	BeyondtrustWorkloadCredentialsDynamicSecretSpec *BeyondtrustWorkloadCredentialsDynamicSecretSpec `json:"beyondtrustWorkloadCredentialsDynamicSecretSpec,omitempty"`
 	CloudsmithAccessTokenSpec                       *CloudsmithAccessTokenSpec                       `json:"cloudsmithAccessTokenSpec,omitempty"`
+	CrusoeContainerRegistryKeySpec                  *CrusoeContainerRegistryKeySpec                  `json:"crusoeContainerRegistryKeySpec,omitempty"`
+	CrusoeIntelligenceAPIKeySpec                    *CrusoeLimitedUsageAPIKeySpec                    `json:"crusoeIntelligenceAPIKeySpec,omitempty"`
+	CrusoeMonitoringKeySpec                         *CrusoeLimitedUsageAPIKeySpec                    `json:"crusoeMonitoringKeySpec,omitempty"`
+	CrusoeObjectStorageKeySpec                      *CrusoeObjectStorageKeySpec                      `json:"crusoeObjectStorageKeySpec,omitempty"`
 	ECRAuthorizationTokenSpec                       *ECRAuthorizationTokenSpec                       `json:"ecrAuthorizationTokenSpec,omitempty"`
 	FakeSpec                                        *FakeSpec                                        `json:"fakeSpec,omitempty"`
 	GCRAccessTokenSpec                              *GCRAccessTokenSpec                              `json:"gcrAccessTokenSpec,omitempty"`

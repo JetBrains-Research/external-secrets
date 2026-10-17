@@ -7,6 +7,7 @@ replace (
 	github.com/external-secrets/external-secrets/generators/v1/acr => ./generators/v1/acr
 	github.com/external-secrets/external-secrets/generators/v1/beyondtrustworkloadcredentials => ./generators/v1/beyondtrustworkloadcredentials
 	github.com/external-secrets/external-secrets/generators/v1/cloudsmith => ./generators/v1/cloudsmith
+	github.com/external-secrets/external-secrets/generators/v1/crusoe => ./generators/v1/crusoe
 	github.com/external-secrets/external-secrets/generators/v1/ecr => ./generators/v1/ecr
 	github.com/external-secrets/external-secrets/generators/v1/fake => ./generators/v1/fake
 	github.com/external-secrets/external-secrets/generators/v1/gcr => ./generators/v1/gcr
@@ -71,6 +72,7 @@ require (
 	github.com/external-secrets/external-secrets/generators/v1/acr v0.0.0-00010101000000-000000000000
 	github.com/external-secrets/external-secrets/generators/v1/beyondtrustworkloadcredentials v0.0.0-00010101000000-000000000000
 	github.com/external-secrets/external-secrets/generators/v1/cloudsmith v0.0.0-00010101000000-000000000000
+	github.com/external-secrets/external-secrets/generators/v1/crusoe v0.0.0-00010101000000-000000000000
 	github.com/external-secrets/external-secrets/generators/v1/ecr v0.0.0-00010101000000-000000000000
 	github.com/external-secrets/external-secrets/generators/v1/fake v0.0.0-00010101000000-000000000000
 	github.com/external-secrets/external-secrets/generators/v1/gcr v0.0.0-00010101000000-000000000000
@@ -196,6 +198,7 @@ require (
 	github.com/ProtonMail/gopenpgp/v3 v3.4.1 // indirect
 	github.com/akeylesslabs/akeyless-go-cloud-id v0.3.7 // indirect
 	github.com/akeylesslabs/akeyless-go/v4 v4.3.0 // indirect
+	github.com/antihax/optional v1.0.0 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
@@ -229,6 +232,7 @@ require (
 	github.com/cloudflare/circl v1.6.5 // indirect
 	github.com/cloudru-tech/iam-sdk v1.0.4 // indirect
 	github.com/cloudru-tech/secret-manager-sdk v1.1.1 // indirect
+	github.com/crusoecloud/client-go v1.0.19 // indirect
 	github.com/cyberark/conjur-api-go v0.15.1 // indirect
 	github.com/danieljoos/wincred v1.2.3 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect

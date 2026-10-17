@@ -1,0 +1,10 @@
+suite: test CrusoeIntelligenceAPIKey
+template: tests/crds/crusoeintelligenceapikey.yml
+tests:
+  - it: matches CrusoeIntelligenceAPIKey correctly
+    asserts:
+      - matchSnapshot:
+          path: tests/__snapshot__
+          # We deliberately want to test all the auth methods.
+          ignoreErrors:
+            - "in body should have at most 1 properties"

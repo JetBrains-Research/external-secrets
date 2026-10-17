@@ -28030,6 +28030,846 @@ string
 </tr>
 </tbody>
 </table>
+<h3 id="generators.external-secrets.io/v1alpha1.CrusoeAccessKeyAuth">CrusoeAccessKeyAuth
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeAuth">CrusoeAuth</a>)
+</p>
+<p>
+<p>CrusoeAccessKeyAuth references a Crusoe Cloud API access key pair.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>accessKeyIDSecretRef</code></br>
+<em>
+<a href="https://pkg.go.dev/github.com/external-secrets/external-secrets/apis/meta/v1#SecretKeySelector">
+External Secrets meta/v1.SecretKeySelector
+</a>
+</em>
+</td>
+<td>
+<p>AccessKeyID references the secret key containing the Crusoe Cloud API access key ID.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>secretKeySecretRef</code></br>
+<em>
+<a href="https://pkg.go.dev/github.com/external-secrets/external-secrets/apis/meta/v1#SecretKeySelector">
+External Secrets meta/v1.SecretKeySelector
+</a>
+</em>
+</td>
+<td>
+<p>SecretKey references the secret key containing the Crusoe Cloud API secret key.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generators.external-secrets.io/v1alpha1.CrusoeAuth">CrusoeAuth
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeContainerRegistryKeySpec">CrusoeContainerRegistryKeySpec</a>, 
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeLimitedUsageAPIKeySpec">CrusoeLimitedUsageAPIKeySpec</a>, 
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeObjectStorageKeySpec">CrusoeObjectStorageKeySpec</a>)
+</p>
+<p>
+<p>CrusoeAuth configures how ESO authenticates with the Crusoe Cloud API.
+Exactly one authentication method must be set.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>accessKey</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeAccessKeyAuth">
+CrusoeAccessKeyAuth
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>AccessKey authenticates with a Crusoe Cloud API access key pair.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>serviceAccount</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeServiceAccountAuth">
+CrusoeServiceAccountAuth
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ServiceAccount authenticates as a Crusoe Cloud service account (not a
+Kubernetes ServiceAccount) using the OAuth2 client credentials grant.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generators.external-secrets.io/v1alpha1.CrusoeContainerRegistryKey">CrusoeContainerRegistryKey
+</h3>
+<p>
+<p>CrusoeContainerRegistryKey generates a token for the Crusoe Container Registry.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeContainerRegistryKeySpec">
+CrusoeContainerRegistryKeySpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>apiURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>APIURL is the base URL of the Crusoe Cloud API, including the version path.
+Defaults to <a href="https://api.cloud.crusoe.ai/v1">https://api.cloud.crusoe.ai/v1</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>auth</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeAuth">
+CrusoeAuth
+</a>
+</em>
+</td>
+<td>
+<p>Auth configures how ESO authenticates with the Crusoe Cloud API.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>alias</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Alias is an optional human-readable name attached to each generated token.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>expiresAfter</code></br>
+<em>
+<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
+Kubernetes meta/v1.Duration
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ExpiresAfter is the lifetime of each generated token. The Crusoe Cloud API
+cannot revoke container registry tokens, so every token stays valid until
+it expires. Keep this short and set the ExternalSecret refreshInterval below it.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generators.external-secrets.io/v1alpha1.CrusoeContainerRegistryKeySpec">CrusoeContainerRegistryKeySpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeContainerRegistryKey">CrusoeContainerRegistryKey</a>, 
+<a href="#generators.external-secrets.io/v1alpha1.GeneratorSpec">GeneratorSpec</a>)
+</p>
+<p>
+<p>CrusoeContainerRegistryKeySpec controls the behavior of the Crusoe Container Registry key generator.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>APIURL is the base URL of the Crusoe Cloud API, including the version path.
+Defaults to <a href="https://api.cloud.crusoe.ai/v1">https://api.cloud.crusoe.ai/v1</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>auth</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeAuth">
+CrusoeAuth
+</a>
+</em>
+</td>
+<td>
+<p>Auth configures how ESO authenticates with the Crusoe Cloud API.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>alias</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Alias is an optional human-readable name attached to each generated token.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>expiresAfter</code></br>
+<em>
+<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
+Kubernetes meta/v1.Duration
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ExpiresAfter is the lifetime of each generated token. The Crusoe Cloud API
+cannot revoke container registry tokens, so every token stays valid until
+it expires. Keep this short and set the ExternalSecret refreshInterval below it.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generators.external-secrets.io/v1alpha1.CrusoeIntelligenceAPIKey">CrusoeIntelligenceAPIKey
+</h3>
+<p>
+<p>CrusoeIntelligenceAPIKey generates an API key for Crusoe Intelligence (managed inference).</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeLimitedUsageAPIKeySpec">
+CrusoeLimitedUsageAPIKeySpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>apiURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>APIURL is the base URL of the Crusoe Cloud API, including the version path.
+Defaults to <a href="https://api.cloud.crusoe.ai/v1">https://api.cloud.crusoe.ai/v1</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>auth</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeAuth">
+CrusoeAuth
+</a>
+</em>
+</td>
+<td>
+<p>Auth configures how ESO authenticates with the Crusoe Cloud API.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>alias</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Alias is an optional human-readable name attached to each generated key.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>projectID</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ProjectID optionally scopes the generated key to a single Crusoe Cloud project.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>expiresAfter</code></br>
+<em>
+<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
+Kubernetes meta/v1.Duration
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ExpiresAfter is the lifetime of each generated key. Keys are also revoked
+when the generator state is cleaned up.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generators.external-secrets.io/v1alpha1.CrusoeLimitedUsageAPIKeySpec">CrusoeLimitedUsageAPIKeySpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeIntelligenceAPIKey">CrusoeIntelligenceAPIKey</a>, 
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeMonitoringKey">CrusoeMonitoringKey</a>, 
+<a href="#generators.external-secrets.io/v1alpha1.GeneratorSpec">GeneratorSpec</a>)
+</p>
+<p>
+<p>CrusoeLimitedUsageAPIKeySpec controls the behavior of the Crusoe Intelligence API key
+and Crusoe Monitoring key generators.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>APIURL is the base URL of the Crusoe Cloud API, including the version path.
+Defaults to <a href="https://api.cloud.crusoe.ai/v1">https://api.cloud.crusoe.ai/v1</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>auth</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeAuth">
+CrusoeAuth
+</a>
+</em>
+</td>
+<td>
+<p>Auth configures how ESO authenticates with the Crusoe Cloud API.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>alias</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Alias is an optional human-readable name attached to each generated key.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>projectID</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ProjectID optionally scopes the generated key to a single Crusoe Cloud project.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>expiresAfter</code></br>
+<em>
+<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
+Kubernetes meta/v1.Duration
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ExpiresAfter is the lifetime of each generated key. Keys are also revoked
+when the generator state is cleaned up.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generators.external-secrets.io/v1alpha1.CrusoeMonitoringKey">CrusoeMonitoringKey
+</h3>
+<p>
+<p>CrusoeMonitoringKey generates an API key for Crusoe Monitoring (observability).</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeLimitedUsageAPIKeySpec">
+CrusoeLimitedUsageAPIKeySpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>apiURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>APIURL is the base URL of the Crusoe Cloud API, including the version path.
+Defaults to <a href="https://api.cloud.crusoe.ai/v1">https://api.cloud.crusoe.ai/v1</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>auth</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeAuth">
+CrusoeAuth
+</a>
+</em>
+</td>
+<td>
+<p>Auth configures how ESO authenticates with the Crusoe Cloud API.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>alias</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Alias is an optional human-readable name attached to each generated key.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>projectID</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ProjectID optionally scopes the generated key to a single Crusoe Cloud project.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>expiresAfter</code></br>
+<em>
+<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
+Kubernetes meta/v1.Duration
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ExpiresAfter is the lifetime of each generated key. Keys are also revoked
+when the generator state is cleaned up.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generators.external-secrets.io/v1alpha1.CrusoeObjectStorageKey">CrusoeObjectStorageKey
+</h3>
+<p>
+<p>CrusoeObjectStorageKey generates an S3 access key for Crusoe Object Storage.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>metadata</code></br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td>
+<code>spec</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeObjectStorageKeySpec">
+CrusoeObjectStorageKeySpec
+</a>
+</em>
+</td>
+<td>
+<br/>
+<br/>
+<table>
+<tr>
+<td>
+<code>apiURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>APIURL is the base URL of the Crusoe Cloud API, including the version path.
+Defaults to <a href="https://api.cloud.crusoe.ai/v1">https://api.cloud.crusoe.ai/v1</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>auth</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeAuth">
+CrusoeAuth
+</a>
+</em>
+</td>
+<td>
+<p>Auth configures how ESO authenticates with the Crusoe Cloud API.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>organizationID</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>OrganizationID is the ID of the Crusoe Cloud organization that owns the S3 access key.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>alias</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Alias is an optional human-readable name attached to each generated key.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>expiresAfter</code></br>
+<em>
+<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
+Kubernetes meta/v1.Duration
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ExpiresAfter is the lifetime of each generated key. Keys are also revoked
+when the generator state is cleaned up.</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generators.external-secrets.io/v1alpha1.CrusoeObjectStorageKeySpec">CrusoeObjectStorageKeySpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeObjectStorageKey">CrusoeObjectStorageKey</a>, 
+<a href="#generators.external-secrets.io/v1alpha1.GeneratorSpec">GeneratorSpec</a>)
+</p>
+<p>
+<p>CrusoeObjectStorageKeySpec controls the behavior of the Crusoe Object Storage key generator.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>APIURL is the base URL of the Crusoe Cloud API, including the version path.
+Defaults to <a href="https://api.cloud.crusoe.ai/v1">https://api.cloud.crusoe.ai/v1</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>auth</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeAuth">
+CrusoeAuth
+</a>
+</em>
+</td>
+<td>
+<p>Auth configures how ESO authenticates with the Crusoe Cloud API.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>organizationID</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>OrganizationID is the ID of the Crusoe Cloud organization that owns the S3 access key.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>alias</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Alias is an optional human-readable name attached to each generated key.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>expiresAfter</code></br>
+<em>
+<a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">
+Kubernetes meta/v1.Duration
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>ExpiresAfter is the lifetime of each generated key. Keys are also revoked
+when the generator state is cleaned up.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generators.external-secrets.io/v1alpha1.CrusoeServiceAccountAuth">CrusoeServiceAccountAuth
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeAuth">CrusoeAuth</a>)
+</p>
+<p>
+<p>CrusoeServiceAccountAuth references the OAuth2 client credentials of a Crusoe Cloud service account.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>clientIDSecretRef</code></br>
+<em>
+<a href="https://pkg.go.dev/github.com/external-secrets/external-secrets/apis/meta/v1#SecretKeySelector">
+External Secrets meta/v1.SecretKeySelector
+</a>
+</em>
+</td>
+<td>
+<p>ClientID references the secret key containing the OAuth2 client ID of the service account credential.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>clientSecretSecretRef</code></br>
+<em>
+<a href="https://pkg.go.dev/github.com/external-secrets/external-secrets/apis/meta/v1#SecretKeySelector">
+External Secrets meta/v1.SecretKeySelector
+</a>
+</em>
+</td>
+<td>
+<p>ClientSecret references the secret key containing the OAuth2 client secret of the service account credential.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>tokenURL</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>TokenURL is the OAuth2 token endpoint. It must use https.
+Defaults to <a href="https://auth.crusoe.ai/oauth2/token">https://auth.crusoe.ai/oauth2/token</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>audience</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Audience is requested for the issued access token.
+Defaults to <a href="https://api.crusoe.ai">https://api.crusoe.ai</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h3 id="generators.external-secrets.io/v1alpha1.ECRAuthorizationToken">ECRAuthorizationToken
 </h3>
 <p>
@@ -28613,6 +29453,18 @@ string
 </tr><tr><td><p>&#34;CloudsmithAccessToken&#34;</p></td>
 <td><p>GeneratorKindCloudsmithAccessToken represents a Cloudsmith access token generator.</p>
 </td>
+</tr><tr><td><p>&#34;CrusoeContainerRegistryKey&#34;</p></td>
+<td><p>GeneratorKindCrusoeContainerRegistryKey represents a Crusoe Container Registry key generator.</p>
+</td>
+</tr><tr><td><p>&#34;CrusoeIntelligenceAPIKey&#34;</p></td>
+<td><p>GeneratorKindCrusoeIntelligenceAPIKey represents a Crusoe Intelligence API key generator.</p>
+</td>
+</tr><tr><td><p>&#34;CrusoeMonitoringKey&#34;</p></td>
+<td><p>GeneratorKindCrusoeMonitoringKey represents a Crusoe Monitoring key generator.</p>
+</td>
+</tr><tr><td><p>&#34;CrusoeObjectStorageKey&#34;</p></td>
+<td><p>GeneratorKindCrusoeObjectStorageKey represents a Crusoe Object Storage key generator.</p>
+</td>
 </tr><tr><td><p>&#34;ECRAuthorizationToken&#34;</p></td>
 <td><p>GeneratorKindECRAuthorizationToken represents an AWS ECR authorization token generator.</p>
 </td>
@@ -28709,6 +29561,54 @@ BeyondtrustWorkloadCredentialsDynamicSecretSpec
 <em>
 <a href="#generators.external-secrets.io/v1alpha1.CloudsmithAccessTokenSpec">
 CloudsmithAccessTokenSpec
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>crusoeContainerRegistryKeySpec</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeContainerRegistryKeySpec">
+CrusoeContainerRegistryKeySpec
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>crusoeIntelligenceAPIKeySpec</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeLimitedUsageAPIKeySpec">
+CrusoeLimitedUsageAPIKeySpec
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>crusoeMonitoringKeySpec</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeLimitedUsageAPIKeySpec">
+CrusoeLimitedUsageAPIKeySpec
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<code>crusoeObjectStorageKeySpec</code></br>
+<em>
+<a href="#generators.external-secrets.io/v1alpha1.CrusoeObjectStorageKeySpec">
+CrusoeObjectStorageKeySpec
 </a>
 </em>
 </td>

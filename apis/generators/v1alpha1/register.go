@@ -77,6 +77,14 @@ var (
 	CloudsmithAccessTokenKind = reflect.TypeFor[CloudsmithAccessToken]().Name()
 	// BeyondtrustWorkloadCredentialsDynamicSecretKind is the kind name for BeyondtrustWorkloadCredentialsDynamicSecret resource.
 	BeyondtrustWorkloadCredentialsDynamicSecretKind = reflect.TypeFor[BeyondtrustWorkloadCredentialsDynamicSecret]().Name()
+	// CrusoeContainerRegistryKeyKind is the kind name for CrusoeContainerRegistryKey resource.
+	CrusoeContainerRegistryKeyKind = reflect.TypeFor[CrusoeContainerRegistryKey]().Name()
+	// CrusoeIntelligenceAPIKeyKind is the kind name for CrusoeIntelligenceAPIKey resource.
+	CrusoeIntelligenceAPIKeyKind = reflect.TypeFor[CrusoeIntelligenceAPIKey]().Name()
+	// CrusoeMonitoringKeyKind is the kind name for CrusoeMonitoringKey resource.
+	CrusoeMonitoringKeyKind = reflect.TypeFor[CrusoeMonitoringKey]().Name()
+	// CrusoeObjectStorageKeyKind is the kind name for CrusoeObjectStorageKey resource.
+	CrusoeObjectStorageKeyKind = reflect.TypeFor[CrusoeObjectStorageKey]().Name()
 )
 
 func init() {
@@ -101,6 +109,10 @@ func init() {
 	SchemeBuilder.Register(&BeyondtrustWorkloadCredentialsDynamicSecret{}, &BeyondtrustWorkloadCredentialsDynamicSecretList{})
 	SchemeBuilder.Register(&ClusterGenerator{}, &ClusterGeneratorList{})
 	SchemeBuilder.Register(&CloudsmithAccessToken{}, &CloudsmithAccessTokenList{})
+	SchemeBuilder.Register(&CrusoeContainerRegistryKey{}, &CrusoeContainerRegistryKeyList{})
+	SchemeBuilder.Register(&CrusoeIntelligenceAPIKey{}, &CrusoeIntelligenceAPIKeyList{})
+	SchemeBuilder.Register(&CrusoeMonitoringKey{}, &CrusoeMonitoringKeyList{})
+	SchemeBuilder.Register(&CrusoeObjectStorageKey{}, &CrusoeObjectStorageKeyList{})
 	SchemeBuilder.Register(&ECRAuthorizationToken{}, &ECRAuthorizationTokenList{})
 	SchemeBuilder.Register(&Fake{}, &FakeList{})
 	SchemeBuilder.Register(&GCRAccessToken{}, &GCRAccessTokenList{})

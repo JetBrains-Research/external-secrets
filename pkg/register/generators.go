@@ -21,6 +21,7 @@ import (
 	acr "github.com/external-secrets/external-secrets/generators/v1/acr"
 	beyondtrustworkloadcredentials "github.com/external-secrets/external-secrets/generators/v1/beyondtrustworkloadcredentials"
 	cloudsmith "github.com/external-secrets/external-secrets/generators/v1/cloudsmith"
+	crusoe "github.com/external-secrets/external-secrets/generators/v1/crusoe"
 	ecr "github.com/external-secrets/external-secrets/generators/v1/ecr"
 	fakegen "github.com/external-secrets/external-secrets/generators/v1/fake"
 	gcr "github.com/external-secrets/external-secrets/generators/v1/gcr"
@@ -42,6 +43,10 @@ func init() {
 	genv1alpha1.Register(acr.Kind(), acr.NewGenerator())
 	genv1alpha1.Register(beyondtrustworkloadcredentials.Kind(), beyondtrustworkloadcredentials.NewGenerator())
 	genv1alpha1.Register(cloudsmith.Kind(), cloudsmith.NewGenerator())
+	genv1alpha1.Register(crusoe.ContainerRegistryKeyKind(), crusoe.NewContainerRegistryKeyGenerator())
+	genv1alpha1.Register(crusoe.IntelligenceAPIKeyKind(), crusoe.NewIntelligenceAPIKeyGenerator())
+	genv1alpha1.Register(crusoe.MonitoringKeyKind(), crusoe.NewMonitoringKeyGenerator())
+	genv1alpha1.Register(crusoe.ObjectStorageKeyKind(), crusoe.NewObjectStorageKeyGenerator())
 	genv1alpha1.Register(ecr.Kind(), ecr.NewGenerator())
 	genv1alpha1.Register(fakegen.Kind(), fakegen.NewGenerator())
 	genv1alpha1.Register(gcr.Kind(), gcr.NewGenerator())

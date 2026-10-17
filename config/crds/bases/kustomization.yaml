@@ -12,6 +12,10 @@ resources:
   - generators.external-secrets.io_beyondtrustworkloadcredentialsdynamicsecrets.yaml
   - generators.external-secrets.io_cloudsmithaccesstokens.yaml
   - generators.external-secrets.io_clustergenerators.yaml
+  - generators.external-secrets.io_crusoecontainerregistrykeys.yaml
+  - generators.external-secrets.io_crusoeintelligenceapikeys.yaml
+  - generators.external-secrets.io_crusoemonitoringkeys.yaml
+  - generators.external-secrets.io_crusoeobjectstoragekeys.yaml
   - generators.external-secrets.io_ecrauthorizationtokens.yaml
   - generators.external-secrets.io_fakes.yaml
   - generators.external-secrets.io_gcraccesstokens.yaml
